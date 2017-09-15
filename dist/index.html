@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Viewer</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <div id="product_viewer"></div>
+    <script src="main.js"></script>
+    <script>
+        // create instance
+        var productViewer = new ProductViewer({
+          element: document.getElementById('product_viewer'),
+          imagePath: './images',
+          filePrefix: 'img',
+          fileExtension: '.jpg'
+        });
+
+        // once loaded, give it a 360 spin
+        productViewer.once('loaded', function() {
+          productViewer.animate360();
+        });
+      </script>
+</body>
+</html>

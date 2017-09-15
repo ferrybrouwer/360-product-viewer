@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <% htmlWebpackPlugin.files.css.forEach(function(css) { %><link rel="stylesheet" href="<%= css %>"><% }); %>
+</head>
+<body>
+    
+    <div id="product_viewer"></div>
+    <% htmlWebpackPlugin.files.js.forEach(function(css) { %><script src="<%= css %>"></script><% }); %>
+    <% if (htmlWebpackPlugin.options.inline){ %><%= htmlWebpackPlugin.options.inline %><% } %>
+</body>
+</html>
