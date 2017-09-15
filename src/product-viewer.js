@@ -55,7 +55,7 @@ class ProductViewer extends EventEmitter {
         // assign props
         Object.assign(this, { imagePath, filePrefix, fileExtension, numberOfImages })
         this.$element = element
-        this.images = [...Array(36).keys()].map(i => {
+        this.images = [...Array(numberOfImages).keys()].map(i => {
             const filename = `${filePrefix}${leftPad(i + 1, 2, '0')}${fileExtension}`
             return path.join(imagePath, filename)
         })
