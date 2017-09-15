@@ -2,6 +2,7 @@
 
 > A simple 360 degrees product viewer
 
+![preview](https://user-images.githubusercontent.com/4455679/30473734-a1b8a04e-9a01-11e7-930b-3d1fb10797e5.gif)
 
 ## Usage
 
