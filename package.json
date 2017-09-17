@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "webpack-dev-server",
-    "build": "NODE_ENV=production webpack -p && if [ ! -d \"dist/images\" ]; then cp -r images dist/images; fi"
+    "build": "if [ -d \"dist\" ]; then rm -rf dist; fi; NODE_ENV=production webpack -p && if [ ! -d \"dist/images\" ]; then cp -r images dist/images; fi"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

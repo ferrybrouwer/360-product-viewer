@@ -8,7 +8,9 @@ module.exports = {
 
   context: path.join(__dirname, "src"),
 
-  entry: path.join(__dirname, "src/product-viewer.js"),
+  entry: {
+    'product-viewer': path.join(__dirname, "src/product-viewer.js")
+  },
 
   output: {
     filename: "[name].js",
