@@ -9,7 +9,7 @@ import loadImage from 'util/loadImage'
 
 /**
  * @class ProductViewer
- * @classdesc Rotate product handling dragging and auto rotate by swapping images 
+ * @classdesc Rotate product handling dragging and auto rotate by swapping images
  */
 class ProductViewer extends EventEmitter {
     // default props
@@ -18,6 +18,7 @@ class ProductViewer extends EventEmitter {
     fileExtension = null
     images = []
     numberOfImages = 0
+    invertMovement = false
 
     // DOM nodes
     $element = null
@@ -40,11 +41,11 @@ class ProductViewer extends EventEmitter {
         EASE_IN_OUT: BezierEasing(0.42, 0, 0.58, 1),
         EASE_OUT: BezierEasing(0.61, 0.26, 0.08, 1.46)
     }
-    
+
     /**
      * @constructor
      * @property {HtmlElement}  element           The container element
-     * @property {String}       imagePath         The path to the images. 
+     * @property {String}       imagePath         The path to the images.
      * @property {String}       filePrefix        File prefix of each image
      * @property {String}       fileExtension     The file extension include the dot
      * @property {Number}       numberOfImages    The number of images
@@ -101,7 +102,7 @@ class ProductViewer extends EventEmitter {
     /**
      * Press handler
      */
-    onPress(e) {        
+    onPress(e) {
         // prevent scrolling when pressed
         e.preventDefault()
 
@@ -134,7 +135,7 @@ class ProductViewer extends EventEmitter {
 
     /**
      * Animate 360 rotation
-     * 
+     *
      * @param {Number}      duration
      * @param {Function}    ease
      * @public
@@ -151,7 +152,7 @@ class ProductViewer extends EventEmitter {
 
             const easeValue = ease(c / this.numberOfImages)
             const newIndex = (startIndex + Math.floor(c * easeValue)) % this.numberOfImages
-            this.updateIndex(newIndex)            
+            this.updateIndex(newIndex)
         }, duration / this.numberOfImages)
     }
 
@@ -170,13 +171,13 @@ class ProductViewer extends EventEmitter {
         document.removeEventListener('touchmove', this.onMove, false)
 
         // remove image from stage
-        this.$image.removeChild(this.$image)
+        this.$element.removeChild(this.$image)
         this.emit('destroyed')
     }
 
     /**
      * Get pageX property from event
-     * 
+     *
      * @param   {MouseEvent|TouchEvent} e
      * @returns {Number}
      * @private
@@ -187,8 +188,8 @@ class ProductViewer extends EventEmitter {
 
     /**
      * Update index
-     * 
-     * @param {Number} index 
+     *
+     * @param {Number} index
      * @returns {Boolean|void}
      * @private
      */
@@ -203,7 +204,7 @@ class ProductViewer extends EventEmitter {
 
     /**
      * Move handler
-     * 
+     *
      * @returns {Boolean|void}
      */
     onMove(e) {
@@ -215,7 +216,7 @@ class ProductViewer extends EventEmitter {
             clearInterval(this.animateInterval)
             this.animateInterval = null
         }
-        
+
         const offsetX = this._getPageXByEvent(e) - (this.pressMouseX || 0)
         const indexPerPixel = this.numberOfImages / this.$element.offsetWidth
 
@@ -223,7 +224,9 @@ class ProductViewer extends EventEmitter {
         let offsetIndex = Math.round(offsetX * indexPerPixel) % this.numberOfImages
 
         // negative rotation direction for improve feeling
-        offsetIndex *= -1
+        if (this.invertMovement) {
+            offsetIndex *= -1
+        }
 
         // calculate new index
         let newIndex = (this.pressIndex + offsetIndex) % this.numberOfImages

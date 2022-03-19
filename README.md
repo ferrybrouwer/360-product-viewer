@@ -46,7 +46,7 @@ For development you can execute the following command:
 yarn && yarn run watch
 ```
 
-This will spinup a dev server on `0.0.0.0:8080`. 
+This will spinup a dev server on `0.0.0.0:8080`.
 
 ## Properties
 
@@ -57,10 +57,11 @@ This will spinup a dev server on `0.0.0.0:8080`.
 | filePrefix | String | The prefix of the file name, for example `img` |
 | fileExtension | String | The extension of the file including the dot, for example `.jpg` |
 | numberOfImages | Number | The number of images inside `imagePath` |
+| invertMovement | Bool | Invert the movement while grabbing (default is `false`) |
 
 
 ## Loading images
-The library tries to load images from `imagePath`. 
+The library tries to load images from `imagePath`.
 The images to load are of the following format `${imagePath}${filePrefix}${index}${fileExtension}`, where `${index}` is the index + 1 number leftpadded with 1 `'0'`
 
 ### Example
@@ -111,10 +112,10 @@ The event `loaded` is dispatched when all images are loaded. This comes in handy
 		....
 	})
 
-	// show loader	
+	// show loader
 	const loader = document.querySelector('.pv-loader')
 	loader.classList.add('pv-loader--js-visible')
-	
+
 	// hide loader when images are loaded
 	pv.once('loaded', () => loader.classList.remove('pv-loader--js-visible')
 </script>
@@ -181,7 +182,7 @@ The callback returns an object which include the following properties:
 | Property name | Property type | Property description |
 | :------------ | :------------ | :------------------- |
 | x | Number | The delta on x position = the difference between x position when user pressed and moved |
-| numberOfImages | Number | The total number of images | 
+| numberOfImages | Number | The total number of images |
 | offsetIndex | Number | The number of indexes shift from when user pressed |
 
 
@@ -195,7 +196,7 @@ To give it a spin of 360 degrees, you can invoke the method `animate360`, for ex
 pv.animate360(2000)
 ```
 
-You can set the duration of the animation with the first parameter. This should be in milliseconds. Default the duration is 1000. 
+You can set the duration of the animation with the first parameter. This should be in milliseconds. Default the duration is 1000.
 
 The second parameter is the easing, for example:
 
