@@ -50,9 +50,10 @@ class ProductViewer extends EventEmitter {
      * @property {String}       fileExtension     The file extension include the dot
      * @property {Number}       numberOfImages    The number of images
      */
-    constructor({ element, imagePath, filePrefix = 'img', fileExtension = '.jpg', numberOfImages = 36 }) {
+    constructor({ element, imagePath, filePrefix = 'img', fileExtension = '.jpg', numberOfImages = 36, invertMovement = false }) {
         super()
 
+        this.invertMovement = invertMovement;
         // assign props
         Object.assign(this, { imagePath, filePrefix, fileExtension, numberOfImages })
         this.$element = element
