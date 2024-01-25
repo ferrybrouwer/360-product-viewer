@@ -1,6 +1,5 @@
 import 'scss/product-viewer.scss'
 
-import path from 'path'
 import leftPad from 'left-pad'
 import { EventEmitter } from 'events'
 import BezierEasing from 'bezier-easing'
@@ -50,15 +49,18 @@ class ProductViewer extends EventEmitter {
      * @property {String}       fileExtension     The file extension include the dot
      * @property {Number}       numberOfImages    The number of images
      */
-    constructor({ element, imagePath, filePrefix = 'img', fileExtension = '.jpg', numberOfImages = 36 }) {
+    constructor({ element, imagePath, filePrefix = 'img', fileExtension = '.jpg', numberOfImages = 36 , invertMovement = false}) {
         super()
 
+
         // assign props
+        this.invertMovement = invertMovement;
         Object.assign(this, { imagePath, filePrefix, fileExtension, numberOfImages })
         this.$element = element
         this.images = [...Array(numberOfImages).keys()].map(i => {
             const filename = `${filePrefix}${leftPad(i + 1, 2, '0')}${fileExtension}`
-            return path.join(imagePath, filename)
+            const imageCompletePath = `${imagePath}/${filename}`;
+            return  imageCompletePath
         })
 
         // add class to container element
